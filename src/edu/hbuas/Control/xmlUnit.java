@@ -18,6 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class xmlUnit {
+    /**
+     * 查询所有书本
+     * @return xml文件中所有书本的集合
+     */
     public static List<Book> xmlParse(){
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         List<Book> list = new ArrayList<>();
@@ -62,6 +66,10 @@ public class xmlUnit {
         return list;
     }
 
+    /**
+     * 添加书本
+     * @param b 要添加的书本
+     */
     public static void pushBook(Book b){
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = null;
@@ -130,6 +138,10 @@ public class xmlUnit {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 删除全部
+     */
     public static void deleteAll(){
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = null;
@@ -143,6 +155,63 @@ public class xmlUnit {
                 node.getParentNode().removeChild(node);
             }
             System.out.println("删除成功!");
+
+            // 把xml内容输出到具体的文件中
+            TransformerFactory formerFactory=TransformerFactory.newInstance();
+            Transformer transformer=formerFactory.newTransformer();
+            // 换行
+            transformer.setOutputProperty(OutputKeys.INDENT, "YES");
+            // 文档字符编码
+            transformer.setOutputProperty(OutputKeys.ENCODING, "utf-8");
+
+            // 可随意指定文件的后缀,效果一样,但xml比较好解析,比如: E:\\person.txt等
+            transformer.transform(new DOMSource(document),new StreamResult("/Users/zxg/Downloads/test/test.xml"));
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 根据id修改数据
+     * @param b 传入一个修改后的book
+     */
+    public static void updateById(Book b){
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = null;
+        try {
+            db = dbf.newDocumentBuilder();
+            Document document = db.parse("/Users/zxg/Downloads/test/test.xml");
+            NodeList books = document.getElementsByTagName("book");
+            int x = books.getLength();
+            System.out.println(x);
+            for (int i = 0; i < x; i++) {
+                Node node = books.item(i);
+                String id = node.getChildNodes().item(1).getTextContent();
+//                System.out.println(id);
+//                System.out.println("书的id:"+b.getBookid());
+//                System.out.println(id.equals(b.getBookid()+""));
+                if (id.equals(b.getBookid()+"")){
+                    System.out.println(id);
+                    node.getChildNodes().item(3).setTextContent(b.getBookname());
+                    node.getChildNodes().item(5).setTextContent(b.getAuth());
+                    node.getChildNodes().item(7).setTextContent(b.getBookpublic());
+                    node.getChildNodes().item(9).setTextContent(b.getBookclass());
+                    node.getChildNodes().item(11).setTextContent(b.getLoantime());
+                    node.getChildNodes().item(13).setTextContent(b.getEturntime());
+                    node.getChildNodes().item(15).setTextContent(b.getStatus());
+                }
+                System.out.println();
+            }
 
             // 把xml内容输出到具体的文件中
             TransformerFactory formerFactory=TransformerFactory.newInstance();

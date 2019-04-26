@@ -181,7 +181,7 @@ public class xmlTest {
 
     @Test
     public void updateBook(){
-        Book b = new Book(20,"我的超级大学","萧敬腾","湖北文理学院","现代","2019-03-02","2019-04-05","1");
+        Book b = new Book(20,"我的超级无敌大学","萧敬腾","湖北文理学院","现代","2019-03-02","2019-04-05","1");
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = null;
         try {
@@ -193,6 +193,19 @@ public class xmlTest {
             for (int i = 0; i < x; i++) {
                 Node node = books.item(i);
                 String id = node.getChildNodes().item(1).getTextContent();
+//                System.out.println(id);
+//                System.out.println("书的id:"+b.getBookid());
+//                System.out.println(id.equals(b.getBookid()+""));
+                if (id.equals(b.getBookid()+"")){
+                    System.out.println(id);
+                    node.getChildNodes().item(3).setTextContent(b.getBookname());
+                    node.getChildNodes().item(5).setTextContent(b.getAuth());
+                    node.getChildNodes().item(7).setTextContent(b.getBookpublic());
+                    node.getChildNodes().item(9).setTextContent(b.getBookclass());
+                    node.getChildNodes().item(11).setTextContent(b.getLoantime());
+                    node.getChildNodes().item(13).setTextContent(b.getEturntime());
+                    node.getChildNodes().item(15).setTextContent(b.getStatus());
+                }
                 System.out.println();
             }
 
