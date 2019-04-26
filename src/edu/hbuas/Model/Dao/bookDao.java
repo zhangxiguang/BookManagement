@@ -10,4 +10,7 @@ public interface bookDao {
     public boolean modBook1(String bookname);
     public boolean modBook2(int bookid);
 
+    //清空数据
+    public void emptyDate();
+
 }

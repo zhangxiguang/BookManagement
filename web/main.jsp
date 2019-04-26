@@ -273,5 +273,12 @@
 
 
 </div>
+<script>
+    $(function () {
+        $.post(
+            "/bookServlet?method=firstLoad"
+        )
+    })
+</script>
 </body>
 </html>

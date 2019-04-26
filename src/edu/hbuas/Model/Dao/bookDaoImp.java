@@ -5,6 +5,7 @@ import edu.hbuas.Model.javaBean.Book;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class bookDaoImp extends BaseDaoImp implements  bookDao {
 
@@ -39,12 +40,11 @@ public class bookDaoImp extends BaseDaoImp implements  bookDao {
         try {
             pre.setString(1,book.getBookname());
             pre.setString(2,book.getAuth());
-            pre.setString(3,book.getPublic());
+            pre.setString(3,book.getBookpublic());
             pre.setString(4,book.getBookclass());
-            pre.setTimestamp(5,book.getLoantime());
-            pre.setTimestamp(6,book.getReturntime());
+            pre.setString(5,book.getLoantime());
+            pre.setString(6,book.getEturntime());
             pre.setString(7,book.getStatus());
-
 
             int rs=pre.executeUpdate();
             if (rs==1){
@@ -121,5 +121,16 @@ public class bookDaoImp extends BaseDaoImp implements  bookDao {
     @Override
     public boolean modBook2(int bookid) {
         return false;
+    }
+
+    @Override
+    public void emptyDate() {
+        String sql = "delete from book";
+        Statement sta = getSta();
+        try {
+            sta.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

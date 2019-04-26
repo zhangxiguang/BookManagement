@@ -10,11 +10,22 @@ public class Book {
   private String auth;
   private String bookpublic;
   private String bookclass;
-  private java.sql.Timestamp loantime;
-  private java.sql.Timestamp returntime;
+  private String loantime;
+  private String eturntime;
   private String status;
 
   public Book() {
+  }
+
+  public Book(int bookid, String bookname, String auth, String bookpublic, String bookclass, String loantime, String eturntime, String status) {
+    this.bookid = bookid;
+    this.bookname = bookname;
+    this.auth = auth;
+    this.bookpublic = bookpublic;
+    this.bookclass = bookclass;
+    this.loantime = loantime;
+    this.eturntime = eturntime;
+    this.status = status;
   }
 
   @Override
@@ -25,21 +36,10 @@ public class Book {
             ", auth='" + auth + '\'' +
             ", bookpublic='" + bookpublic + '\'' +
             ", bookclass='" + bookclass + '\'' +
-            ", loantime=" + loantime +
-            ", returntime=" + returntime +
+            ", loantime='" + loantime + '\'' +
+            ", eturntime='" + eturntime + '\'' +
             ", status='" + status + '\'' +
             '}';
-  }
-
-  public Book(int bookid, String bookname, String auth, String bookpublic, String bookclass, java.sql.Timestamp loantime, java.sql.Timestamp returntime, String status) {
-    this.bookid = bookid;
-    this.bookname = bookname;
-    this.auth = auth;
-    this.bookpublic = bookpublic;
-    this.bookclass = bookclass;
-    this.loantime = loantime;
-    this.returntime = returntime;
-    this.status = status;
   }
 
   public int getBookid() {
@@ -50,7 +50,6 @@ public class Book {
     this.bookid = bookid;
   }
 
-
   public String getBookname() {
     return bookname;
   }
@@ -58,7 +57,6 @@ public class Book {
   public void setBookname(String bookname) {
     this.bookname = bookname;
   }
-
 
   public String getAuth() {
     return auth;
@@ -68,15 +66,13 @@ public class Book {
     this.auth = auth;
   }
 
-
-  public String getPublic() {
+  public String getBookpublic() {
     return bookpublic;
   }
 
-  public void setPublic(String bookpublic) {
+  public void setBookpublic(String bookpublic) {
     this.bookpublic = bookpublic;
   }
-
 
   public String getBookclass() {
     return bookclass;
@@ -86,24 +82,21 @@ public class Book {
     this.bookclass = bookclass;
   }
 
-
-  public java.sql.Timestamp getLoantime() {
+  public String getLoantime() {
     return loantime;
   }
 
-  public void setLoantime(java.sql.Timestamp loantime) {
+  public void setLoantime(String loantime) {
     this.loantime = loantime;
   }
 
-
-  public java.sql.Timestamp getReturntime() {
-    return returntime;
+  public String getEturntime() {
+    return eturntime;
   }
 
-  public void setReturntime(java.sql.Timestamp returntime) {
-    this.returntime = returntime;
+  public void setEturntime(String eturntime) {
+    this.eturntime = eturntime;
   }
-
 
   public String getStatus() {
     return status;
@@ -112,5 +105,4 @@ public class Book {
   public void setStatus(String status) {
     this.status = status;
   }
-
 }

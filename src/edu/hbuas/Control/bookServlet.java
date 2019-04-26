@@ -81,6 +81,10 @@ public class bookServlet extends HttpServlet {
                 delBook2(request, response);
                 break;
             }
+            case "firstLoad":{
+                firstLoad(request,response);
+                break;
+            }
         }
     }
 
@@ -188,37 +192,6 @@ public class bookServlet extends HttpServlet {
                                             + childNodes.item(k).getNodeName());
                                     //获取了element类型节点的节点值
                                     System.out.println("--节点值是：" + childNodes.item(k).getFirstChild().getNodeValue());
-                                    //System.out.println("--节点值是：" + childNodes.item(k).getTextContent());
-
-                                    if(k==1){
-                                        books.setBookname(childNodes.item(k).getFirstChild().getNodeValue());
-                                    }else if(k==3){
-                                        books.setAuth(childNodes.item(k).getFirstChild().getNodeValue());
-                                    }else if(k==5){
-                                        books.setPublic(childNodes.item(k).getFirstChild().getNodeValue());
-                                    }else if(k==7){
-                                        books.setBookclass(childNodes.item(k).getFirstChild().getNodeValue());
-                                    }else if(k==9){
-                                        String loantime=childNodes.item(k).getFirstChild().getNodeValue();
-                                        System.out.println("loantime:"+loantime);
-                                        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                        format.setLenient(false);
-                                        Timestamp ts = new Timestamp(format.parse(loantime).getTime());
-                                        System.out.println(ts.toString());
-                                        books.setLoantime(ts);
-                                    }else if(k==11){
-                                        String returntime=childNodes.item(k).getFirstChild().getNodeValue();
-                                        System.out.println("returntime:"+returntime);
-                                        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                        format.setLenient(false);
-                                        Timestamp ts = new Timestamp(format.parse(returntime).getTime());
-                                        System.out.println(ts.toString());
-                                        books.setReturntime(ts);
-                                    }else if(k==13){
-                                        books.setStatus(childNodes.item(k).getFirstChild().getNodeValue());
-                                    }
-
-
                                 }
 
                             }
@@ -280,6 +253,19 @@ public class bookServlet extends HttpServlet {
             System.out.println("添加图书成功");
         }else {
             System.out.println("添加图书失败");
+        }
+    }
+
+    protected void firstLoad(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //第一次加载先清空数据库
+        bookDao.emptyDate();
+
+
+        //然后用xml文件中的数据填充数据库
+        List<Book> list = xmlUnit.xmlParse();
+        for (Book book:list){
+            bookDao.addBokkByXml(book);
+            System.out.println(book);
         }
     }
 
