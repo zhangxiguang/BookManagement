@@ -139,7 +139,7 @@ public class xmlTest {
         }
     }
     @Test
-    public void createxml(){
+    public void deletexml(){
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = null;
         try {
@@ -181,7 +181,7 @@ public class xmlTest {
 
     @Test
     public void updateBook(){
-        Book b = new Book(20,"我的超级无敌大学","萧敬腾","湖北文理学院","现代","2019-03-02","2019-04-05","1");
+        Book b = new Book(20,"我的超级无敌大学","萧腾","湖北文理学院","现代","2019-03-02","2019-04-05","1");
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = null;
         try {

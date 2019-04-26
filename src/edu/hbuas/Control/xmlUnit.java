@@ -193,15 +193,10 @@ public class xmlUnit {
             Document document = db.parse("/Users/zxg/Downloads/test/test.xml");
             NodeList books = document.getElementsByTagName("book");
             int x = books.getLength();
-            System.out.println(x);
             for (int i = 0; i < x; i++) {
                 Node node = books.item(i);
                 String id = node.getChildNodes().item(1).getTextContent();
-//                System.out.println(id);
-//                System.out.println("书的id:"+b.getBookid());
-//                System.out.println(id.equals(b.getBookid()+""));
                 if (id.equals(b.getBookid()+"")){
-                    System.out.println(id);
                     node.getChildNodes().item(3).setTextContent(b.getBookname());
                     node.getChildNodes().item(5).setTextContent(b.getAuth());
                     node.getChildNodes().item(7).setTextContent(b.getBookpublic());
